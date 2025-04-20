@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        vector<int> stack;
+        for (string& t : tokens) {
+            if (t == "+" || t == "-" || t == "*" || t == "/") {
+                int b = stack.back(); stack.pop_back();
+                int a = stack.back(); stack.pop_back();
+                int res;
+                if (t == "+") res = a + b;
+                else if (t == "-") res = a - b;
+                else if (t == "*") res = a * b;
+                else res = a / b;
+                stack.push_back(res);
+            } else {
+                stack.push_back(stoi(t));
+            }
+        }
+        return stack.back();
+    }
+};
